@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic-tac-toe Game</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: lightskyblue;
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    text-align: center;
+  }
+.cell.X {
+    color: red;
+  }
+.cell.O {
+    color: green;
+  }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    margin-top: 20px;
+  }
+  .cell {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s, color 0.2s;
+  }
+  .cell:hover {
+    background-color: #e0e0e0;
+  }
+  .winner-x {
+    color: red;
+    animation: pop 0.3s ease-in-out;
+  }
+  .winner-o {
+    color: green;
+    animation: pop 0.3s ease-in-out;
+  }
+  @keyframes pop {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+ button:hover {
+    background-color: #fff;
+    color:black;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Tic-tac-toe</h1>
+  <div class="board" id="board">
+    <div class="cell" onclick="makeMove(this)"></div>
+    <div class="cell" onclick="makeMove(this)"></div>
+    <div class="cell" onclick="makeMove(this)"></div>
+    <div class="cell" onclick="makeMove(this)"></div>
+    <div class="cell" onclick="makeMove(this)"></div>
+    <div class="cell" onclick="makeMove(this)"></div>
+    <div class="cell" onclick="makeMove(this)"></div>
+    <div class="cell" onclick="makeMove(this)"></div>
+    <div class="cell" onclick="makeMove(this)"></div>
+  </div>
+  <p>Player 1: X | Player 2: O</p>
+  <button onclick="resetBoard()">Reset</button>
+</div>
+
+<script>
+  let currentPlayer = "X";
+  const cells = document.querySelectorAll(".cell");
+
+  function makeMove(cell) {
+    if (!cell.textContent) {
+      cell.textContent = currentPlayer;
+      cell.classList.add(currentPlayer);
+      checkWinner();
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+    }
+  }
+
+  function checkWinner() {
+  const winningCombos = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
+  ];
+
+  for (const combo of winningCombos) {
+    const [a, b, c] = combo;
+    if (
+      cells[a].textContent &&
+      cells[a].textContent === cells[b].textContent &&
+      cells[a].textContent === cells[c].textContent
+    ) {
+      const winnerClass = cells[a].textContent === "X" ? "winner-x" : "winner-o";
+      cells[a].classList.add("strike-through", winnerClass);
+      cells[b].classList.add("strike-through", winnerClass);
+      cells[c].classList.add("strike-through", winnerClass);
+      setTimeout(() => {
+        alert(`${cells[a].textContent} wins!`);
+        resetBoard();
+      }, 500);
+      return;
+    }
+  }
+}
+
+
+  function resetBoard() {
+    cells.forEach(cell => {
+      cell.textContent = "";
+      cell.classList.remove("X", "O", "winner-x", "winner-o");
+    });
+    currentPlayer = "X";
+  }
+</script>
+
+</body>
+</html>

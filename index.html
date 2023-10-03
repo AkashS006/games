@@ -15,21 +15,23 @@
     min-height: 100vh;
     font-family: Arial, sans-serif;
   }
-  #tic-tac-toe-button {
+  .game-button {
     display: inline-block;
     background-color: white;
     color: black;
     padding: 10px 20px;
-    border: none;
+    border: 2px solid black; /* Added black border */
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
-    text-decoration: none; /* Remove default link underline */
-    transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s, border-color 0.3s; /* Added border-color transition */
+    margin: 10px; /* Added margin for spacing between buttons */
   }
-  #tic-tac-toe-button:hover {
+  .game-button:hover {
     background-color: black;
-    color:white;
+    color: white;
+    border-color: white; /* Added white border on hover */
     transform: scale(1.05);
   }
   footer {
@@ -42,10 +44,11 @@
     color: black;
   }
 </style>
-<title>Tic-tac-toe Game</title>
+<title>Games</title>
 </head>
 <body>
-  <a href="xogame.html"><button id="tic-tac-toe-button">Tic-tac-toe</button></a>
+  <a href="xogame.html"><button class="game-button">Tic-tac-toe</button></a>
+  <a href="your-toss-page.html"><button class="game-button">Toss</button></a> <!-- Add the Toss button here -->
   <footer>
     The listed games were created by AKASH S
   </footer>

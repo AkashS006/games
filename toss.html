@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: lightskyblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  #output {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+  }
+  .result-image-container {
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .result-image {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background-size: cover;
+    background-position: center;
+  }
+  .result-text-container {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
+    animation: resultAnimation 2s ease infinite alternate; /* Extended the animation duration */
+  }
+  @keyframes resultAnimation {
+    0% {
+      background-color: white;
+      border: 2px solid white;
+      color: white; /* Initial font color */
+    }
+    50% {
+      background-color: blue; /* Blue background color during the blink */
+      color: white; /* White font color during the blink */
+    }
+    100% {
+      background-color: white; /* White background color */
+      border: 2px solid white;
+      color: black; /* Black font color after the blink */
+    }
+  }
+  .spin {
+    animation: spin 1s linear;
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  #toss-button {
+    font-size: 24px;
+    padding: 15px 30px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+</style>
+<title>Coin Toss Game</title>
+</head>
+<body>
+  
+<center>
+  <script>
+    function tossCoin() {
+      const randomValue = Math.random();
+      const tossOutput = document.getElementById("output");
+      let resultText = "";
+      let resultImage = "";
+
+      if (randomValue < 0.5) {
+        resultText = "KING";
+        resultImage = "<div class='result-image spin' style='background-image: url(https://w0.peakpx.com/wallpaper/383/65/HD-wallpaper-crown-3-black-king-lock-princess-screen-star-wall-yellow.jpg);'></div>";
+      } else {
+        resultText = "FLOWER";
+        resultImage = "<div class='result-image spin' style='background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLZ7KSVmav84RWgHvPn0j3Prc6HjeVSAQm5g&usqp=CAU);'></div>";
+      }
+
+      tossOutput.innerHTML = `<div class='result-image-container'>${resultImage}</div><div class='result-text-container'>${resultText}</div>`;
+    }
+  </script>
+</center>
+
+<h1>Coin Toss</h1>
+  <button id="toss-button" onclick="tossCoin()">Toss the Coin</button>
+  <div id="output"></div>
+
+</body>
+</html>
